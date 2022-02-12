@@ -42,7 +42,7 @@ const sneaker = createSlice({
       state.loading = false;
       state.errors = null;
       state.nameLike = '';
-      state.sortBy = null;
+      state.sortBy = 'release-date-O';
     },
     initPagination: (state: SneakerState) => {
       state.totalCount = null;
