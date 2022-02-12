@@ -5,7 +5,7 @@ type errorHandlerFunc = (error: any) => any;
 let apiErrorHandler: errorHandlerFunc;
 
 export const API = axios.create({
-  baseURL: `${import.meta.env.VITE_APP_API_ENDPOINT}` || 'http://localhost:5000',
+  baseURL: 'http://localhost:5000',
   withCredentials: true,
   timeout: 30000,
 });

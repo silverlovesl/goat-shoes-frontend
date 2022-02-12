@@ -27,18 +27,22 @@ const SneakerGridToolbox: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="sneaker-grid-toolbox">
+    <div data-testid="sneaker-grid-toolbox" className="sneaker-grid-toolbox">
       <div className="sneaker-grid-toolbox__wrapper">
-        <a className="sneaker-grid-toolbox__filter-btn" onClick={() => setShowFilter(!showFilter)}>
-          <span>{!showFilter ? 'Show Filters' : 'Hide Filters'}</span>
-          <span>&gt;</span>
+        <a data-testid="sneaker-grid-toolbox__filter-btn" className="sneaker-grid-toolbox__filter-btn" onClick={() => setShowFilter(!showFilter)}>
+          {!showFilter ? 'Show Filters' : 'Hide Filters'}
         </a>
-        <span className="sneaker-grid-toolbox__search-result">
+        <span data-testid="sneaker-grid-toolbox__search-result" className="sneaker-grid-toolbox__search-result">
           Showing {props.searchResultCount} {props.searchResultCount > 1 ? 'Results' : 'Result'}
         </span>
         <div className="sneaker-grid-toolbox__sort-by">
           <span>Sort By:</span>
-          <Select defaultValue={props.defaultSortBy} className="sneaker-grid-toolbox__sort-by-box" onSelect={onSortBy}>
+          <Select
+            data-testid="sneaker-grid-toolbox__sortby-select"
+            defaultValue={props.defaultSortBy}
+            className="sneaker-grid-toolbox__sort-by-box"
+            onSelect={onSortBy}
+          >
             <Option value="release-date-O">Release Date(Oldest-Newest)</Option>
             <Option value="release-date-N">Release Date(Newest-Oldest)</Option>
             <Option value="price-L">Price(Low-Hight)</Option>
@@ -47,7 +51,7 @@ const SneakerGridToolbox: React.FC<Props> = (props) => {
         </div>
       </div>
       {showFilter && (
-        <div className="sneaker-grid-toolbox__filter">
+        <div data-testid="sneaker-grid-toolbox__filters" className="sneaker-grid-toolbox__filter">
           <div className="sneaker-grid-toolbox__filter__name">
             <Input addonBefore="Shoe name like" onInput={(e: any) => props.onNameChange?.call(this, e.target.value)} />
           </div>

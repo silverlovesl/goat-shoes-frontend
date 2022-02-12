@@ -13,13 +13,13 @@ type Props = {};
 
 const SneakerGridPage: React.FC<Props> = (props) => {
   // Snecker frame div element
-  const sneakerGrid = useRef(null as HTMLDivElement);
+  const sneakerGridWrap = useRef(null as HTMLDivElement);
   const dispatch = useDispatch();
   const { loading, sneakers, pageNo, sortBy, limit, nameLike, shoeCondtion, totalCount, errors } = useSelector((state: RootState) => state.sneaker);
   const history = useHistory();
 
   const onGridScroll = () => {
-    const { scrollHeight, clientHeight, scrollTop } = sneakerGrid.current;
+    const { scrollHeight, clientHeight, scrollTop } = sneakerGridWrap.current;
     // Detect bottom of grid view
     if (scrollHeight - clientHeight <= scrollTop && !loading) {
       dispatch(nextPage());
@@ -46,10 +46,10 @@ const SneakerGridPage: React.FC<Props> = (props) => {
   };
 
   useLayoutEffect(() => {
-    sneakerGrid.current.onscroll = onGridScroll;
+    sneakerGridWrap.current.onscroll = onGridScroll;
     return () => {
       // Remove div scroll event listener
-      sneakerGrid.current.onscroll = null;
+      sneakerGridWrap.current.onscroll = null;
     };
   });
 
@@ -73,7 +73,7 @@ const SneakerGridPage: React.FC<Props> = (props) => {
   }, []);
 
   return (
-    <div ref={sneakerGrid} className="sneaker-grid-page">
+    <div data-testid="sneaker-grid-page" className="sneaker-grid-page">
       {/* Filter,Search condition */}
       <SneakerGridToolbox
         searchResultCount={totalCount}
@@ -83,19 +83,30 @@ const SneakerGridPage: React.FC<Props> = (props) => {
         onConditionChange={onConditionChange}
       />
       {/* Error Message */}
-      {errors && <Alert type="error" message="Error" showIcon description="An error occured, please contact to admin" style={{ marginBottom: '12px' }} />}
+      {errors && (
+        <Alert
+          data-testid="sneaker-grid-page__alert"
+          type="error"
+          message="Error"
+          showIcon
+          description="An error occured, please contact to admin"
+          style={{ marginBottom: '12px' }}
+        />
+      )}
       {/* Sneaker grid */}
-      <Card>
-        {sneakers.map((item) => {
-          return (
-            <Card.Grid key={item.id} className="sneaker-grid-page__grid-cell">
-              <a onClick={() => onSneakerSelect(item)}>
-                <SneakerCard item={item} />
-              </a>
-            </Card.Grid>
-          );
-        })}
-      </Card>
+      <div ref={sneakerGridWrap} data-testid="sneaker-grid-page__grid-wrap" className="sneaker-grid-page__grid-wrap">
+        <Card>
+          {sneakers.map((item) => {
+            return (
+              <Card.Grid data-testid={`sneaker-grid-page__grid-cell`} key={item.id} className="sneaker-grid-page__grid-cell">
+                <a onClick={() => onSneakerSelect(item)}>
+                  <SneakerCard item={item} />
+                </a>
+              </Card.Grid>
+            );
+          })}
+        </Card>
+      </div>
     </div>
   );
 };

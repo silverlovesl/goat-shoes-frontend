@@ -60,7 +60,6 @@ const sneaker = createSlice({
       state.errors = null;
     },
     setTotalCount: (state: SneakerState, action: PayloadAction<number>) => {
-      console.log(action.payload);
       state.totalCount = action.payload;
     },
     setSortBy: (state: SneakerState, action: PayloadAction<SneakSearchSortBy>) => {

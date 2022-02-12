@@ -4,8 +4,8 @@ import { RootState } from '../../stores';
 import { fetchSneakerByID, initState } from '../../stores/features/sneakerDetailSlice';
 import { Alert, Button, Card } from 'antd';
 import { useRouteMatch, useHistory } from 'react-router-dom';
-import './SneakerDetailPage.scss';
 import { StringUtils } from '../../utils';
+import './SneakerDetailPage.scss';
 
 type Props = {};
 
@@ -33,7 +33,7 @@ const SneakerDetailPage: React.FC<Props> = (props) => {
   }, []);
 
   return (
-    <div className="sneaker-detail-page">
+    <div data-testid="sneaker-detail-page" className="sneaker-detail-page">
       {!loading && errors && (
         <span>
           <Alert showIcon type="error" message="Error" description={errors} style={{ margin: '24px 0px' }} />
@@ -58,8 +58,12 @@ const SneakerDetailPage: React.FC<Props> = (props) => {
                 <Button size="small">Want</Button>
               </div>
               <div>
-                <h1 className="sneaker-detail-page__sneaker-info-showcase__name">{sneaker.name}</h1>
-                <p className="sneaker-detail-page__sneaker-info-showcase__sku">SKU: {sneaker.sku}</p>
+                <h1 className="sneaker-detail-page__sneaker-info-showcase__name" data-testid="sneaker-detail-page__sneaker-name">
+                  {sneaker.name}
+                </h1>
+                <p className="sneaker-detail-page__sneaker-info-showcase__sku" data-testid="sneaker-detail-page__sku">
+                  SKU: {sneaker.sku}
+                </p>
               </div>
               <div className="sneaker-detail-page__sneaker-info-showcase__button-group">
                 <a>Buy New - {compPrice}</a>

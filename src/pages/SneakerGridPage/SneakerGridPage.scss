@@ -1,8 +1,10 @@
 @import '../../assets/scss/theme/default';
 
 .sneaker-grid-page {
-  overflow-y: auto;
-  max-height: 100vh;
+  &__grid-wrap {
+    overflow-y: auto;
+    max-height: calc(100vh - 56px);
+  }
   &__grid-cell {
     height: 400px;
     padding: 15px 22px;

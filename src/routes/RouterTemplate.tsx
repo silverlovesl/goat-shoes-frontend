@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import routes from './routes';
-import { Switch, Route, withRouter, RouteProps } from 'react-router-dom';
+import { Switch, Route, withRouter, RouteProps, Redirect } from 'react-router-dom';
 import PageLayout from '../components/PageLayout';
 
 type PageProps = {};
@@ -16,7 +16,10 @@ const RouterTemplate: React.FC<PageProps> = (props) => {
 
   return (
     <Switch>
-      <Suspense fallback={<></>}>{routeComps.map((comp) => comp)}</Suspense>
+      <Suspense fallback={<></>}>
+        {routeComps.map((comp) => comp)}
+        <Route exact={true} key="home" path="/" render={() => <Redirect to="/sneaker" />} />
+      </Suspense>
     </Switch>
   );
 };
