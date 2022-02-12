@@ -1,0 +1,31 @@
+import { Button } from 'antd';
+import React from 'react';
+import { Sneaker } from '../../models';
+import { StringUtils } from '../../utils';
+import './SneakerCard.scss';
+
+type Props = {
+  item: Sneaker;
+};
+
+const SneakerCard: React.FC<Props> = (props) => {
+  const { item } = props;
+
+  const compPrice = <span>¥{StringUtils.formatAmount(item.retail_price_cents)}</span>;
+
+  return (
+    <div className="sneader-card">
+      <div className="sneader-card__header">
+        <h3>{item.release_year}</h3>
+        <Button size="small">Want</Button>
+      </div>
+      <div className="sneader-card__body">
+        {item.has_picture && <img src={item.grid_picture_url} />}
+        <div className="sneader-card__name">{item.name}</div>
+        <div className="sneader-card__price">{item.retail_price_cents && compPrice}</div>
+      </div>
+    </div>
+  );
+};
+
+export default SneakerCard;

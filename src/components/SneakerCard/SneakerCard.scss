@@ -1,0 +1,61 @@
+@import '../../assets/scss/theme/default';
+.sneader-card {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    h3 {
+      color: $primary-gray;
+      font-size: 12px;
+      margin: 0;
+    }
+  }
+  &__body {
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    img {
+      height: 150px;
+      width: auto;
+      box-sizing: border-box;
+      user-select: none;
+    }
+    color: $primary-color;
+  }
+  &__name {
+    text-align: center;
+    margin-top: 1.5rem;
+    min-height: 40px;
+  }
+  &__price {
+    margin: 22px;
+    font-weight: 500;
+  }
+
+  @media screen and (min-width: $screen-xs-min) {
+    &__body {
+      img {
+        height: 150px;
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-sm-min) {
+    &__body {
+      img {
+        height: 150px;
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-md-min) {
+    &__body {
+      img {
+        height: 200px;
+      }
+    }
+  }
+}

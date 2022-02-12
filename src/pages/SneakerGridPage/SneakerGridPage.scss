@@ -1,0 +1,45 @@
+@import '../../assets/scss/theme/default';
+
+.sneaker-grid-page {
+  overflow-y: auto;
+  max-height: 100vh;
+  &__grid-cell {
+    height: 400px;
+    padding: 15px 22px;
+    width: 50%;
+  }
+
+  @media screen and (min-width: $screen-xs-min) {
+    padding: 0px 0px;
+    &__grid-cell {
+      width: 50%;
+    }
+  }
+  @media screen and (min-width: $screen-sm-min) {
+    padding: 0px 0px;
+    &__grid-cell {
+      width: 50%;
+    }
+  }
+
+  @media screen and (min-width: $screen-md-min) {
+    padding: 0px 30px;
+    &__grid-cell {
+      width: 33.33333%;
+    }
+  }
+
+  @media screen and (min-width: $screen-lg-min) {
+    padding: 0px 90px;
+    &__grid-cell {
+      width: 33.33333%;
+    }
+  }
+
+  @media screen and (min-width: $screen-xl-min) {
+    padding: 0px 90px;
+    &__grid-cell {
+      width: 25%;
+    }
+  }
+}
