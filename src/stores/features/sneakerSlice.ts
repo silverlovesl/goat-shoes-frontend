@@ -12,12 +12,14 @@ interface SneakerSearchCondition {
 }
 
 type SneakerState = {
+  totalCount?: number;
   sneakers: Sneaker[];
   loading: boolean;
-  err: string | null;
+  errors: string | null;
 } & SneakerSearchCondition;
 
 const initialState: SneakerState = {
+  totalCount: null,
   sneakers: [],
   pageNo: 1,
   limit: 20,
@@ -25,7 +27,7 @@ const initialState: SneakerState = {
   nameLike: '',
   shoeCondtion: '',
   loading: false,
-  err: null,
+  errors: null,
 };
 
 const sneaker = createSlice({
@@ -33,27 +35,33 @@ const sneaker = createSlice({
   initialState,
   reducers: {
     initState: (state: SneakerState) => {
+      state.totalCount = null;
       state.sneakers = [];
       state.pageNo = 1;
       state.limit = 20;
       state.loading = false;
-      state.err = null;
+      state.errors = null;
       state.nameLike = '';
       state.sortBy = null;
     },
     initPagination: (state: SneakerState) => {
+      state.totalCount = null;
       state.sneakers = [];
       state.pageNo = 1;
       state.limit = 20;
       state.loading = false;
-      state.err = null;
+      state.errors = null;
     },
     nextPage: (state: SneakerState) => {
       state.pageNo += 1;
-      console.log(state.pageNo);
     },
     startFetching: (state: SneakerState) => {
       state.loading = true;
+      state.errors = null;
+    },
+    setTotalCount: (state: SneakerState, action: PayloadAction<number>) => {
+      console.log(action.payload);
+      state.totalCount = action.payload;
     },
     setSortBy: (state: SneakerState, action: PayloadAction<SneakSearchSortBy>) => {
       state.sortBy = action.payload;
@@ -68,10 +76,14 @@ const sneaker = createSlice({
       state.shoeCondtion = action.payload;
     },
     setSneakers: (state: SneakerState, action: PayloadAction<Sneaker[]>) => {
+      state.sneakers = action.payload;
+    },
+    appendSneakers: (state: SneakerState, action: PayloadAction<Sneaker[]>) => {
       state.sneakers = state.sneakers.concat(action.payload);
     },
-    setError: (state: SneakerState, action: PayloadAction<string>) => {
-      state.err = action.payload;
+
+    setErrors: (state: SneakerState, action: PayloadAction<string>) => {
+      state.errors = action.payload;
     },
     finishFetching: (state: SneakerState) => {
       state.loading = false;
@@ -85,9 +97,12 @@ export const {
   nextPage,
   startFetching,
   setSneakers,
+  appendSneakers,
   finishFetching,
   setSortBy,
   setNameLike,
+  setTotalCount,
+  setErrors,
   setShoeCondtion,
   // Force break line
 } = sneaker.actions;
@@ -101,9 +116,13 @@ export const fetchSneakers =
   async (dispach) => {
     try {
       dispach(startFetching);
-      const sneakerData = await sneakerAPI.fetchSneakers(condition.pageNo, condition.limit, condition.sortBy, condition.nameLike, condition.shoeCondtion);
-      dispach(setSneakers(sneakerData));
+      const response = await sneakerAPI.fetchSneakers(condition.pageNo, condition.limit, condition.sortBy, condition.nameLike, condition.shoeCondtion);
+      dispach(setTotalCount(response.totalCount));
+      if (response.data?.length > 0) {
+        dispach(appendSneakers(response.data));
+      }
     } catch (err) {
+      dispach(setErrors(String(err)));
     } finally {
       dispach(finishFetching());
     }

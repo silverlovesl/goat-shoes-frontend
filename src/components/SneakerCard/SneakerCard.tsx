@@ -14,15 +14,15 @@ const SneakerCard: React.FC<Props> = (props) => {
   const compPrice = <span>¥{StringUtils.formatAmount(item.retail_price_cents)}</span>;
 
   return (
-    <div className="sneader-card">
-      <div className="sneader-card__header">
+    <div className="sneaker-card">
+      <div className="sneaker-card__header">
         <h3>{item.release_year}</h3>
         <Button size="small">Want</Button>
       </div>
-      <div className="sneader-card__body">
+      <div className="sneaker-card__body">
         {item.has_picture && <img src={item.grid_picture_url} />}
-        <div className="sneader-card__name">{item.name}</div>
-        <div className="sneader-card__price">{item.retail_price_cents && compPrice}</div>
+        <div className="sneaker-card__name">{item.name}</div>
+        <div className="sneaker-card__price">{item.retail_price_cents && compPrice}</div>
       </div>
     </div>
   );

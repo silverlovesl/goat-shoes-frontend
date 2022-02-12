@@ -1,5 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { Serializable, APIError } from '../../models';
+import axios from 'axios';
 
 type errorHandlerFunc = (error: any) => any;
 
@@ -37,11 +36,9 @@ API.interceptors.request.use(
 );
 
 API.interceptors.response.use(undefined, (err) => {
-  if (apiErrorHandler) {
-    apiErrorHandler(err);
-  }
+  console.log(err?.response);
   if (err.response) {
-    return Promise.reject(err.response.data as APIError);
+    return Promise.reject(err.response);
   } else {
     return Promise.reject(err);
   }

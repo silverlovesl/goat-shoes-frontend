@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../stores';
-import { fetchSneakerByID } from '../../stores/features/sneakerDetailSlice';
-import { Button, Card } from 'antd';
-import { useRouteMatch } from 'react-router-dom';
+import { fetchSneakerByID, initState } from '../../stores/features/sneakerDetailSlice';
+import { Alert, Button, Card } from 'antd';
+import { useRouteMatch, useHistory } from 'react-router-dom';
 import './SneakerDetailPage.scss';
 import { StringUtils } from '../../utils';
 
@@ -11,22 +11,35 @@ type Props = {};
 
 const SneakerDetailPage: React.FC<Props> = (props) => {
   const dispatch = useDispatch();
-  const { sneaker, loading, err } = useSelector((state: RootState) => state.sneakerDetail);
+  const { sneaker, loading, errors } = useSelector((state: RootState) => state.sneakerDetail);
   const match = useRouteMatch();
+  const history = useHistory();
 
   const compPrice = <span>¥{StringUtils.formatAmount(sneaker?.retail_price_cents)}</span>;
+
+  const goBack = () => {
+    history.push('/sneaker');
+  };
 
   useEffect(() => {
     const sneaker_id = match.params['sneaker_id'] as string;
     if (!Number.isNaN(sneaker_id)) {
       dispatch(fetchSneakerByID(parseInt(sneaker_id)));
-    } else {
-      // TODO: Error handling
     }
+
+    return () => {
+      dispatch(initState());
+    };
   }, []);
 
   return (
     <div className="sneaker-detail-page">
+      {!loading && errors && (
+        <span>
+          <Alert showIcon type="error" message="Error" description={errors} style={{ margin: '24px 0px' }} />
+          <Button onClick={goBack}>Back</Button>
+        </span>
+      )}
       {!loading && sneaker ? (
         <div>
           <Card className="sneaker-detail-page__sneaker-info">
@@ -55,19 +68,13 @@ const SneakerDetailPage: React.FC<Props> = (props) => {
             </Card.Grid>
           </Card>
 
-          {/* <div className="sneaker-detail-page__detail-arrow-wrapper">
-            <a>
-              Details <div className="arrow">&gt;</div>
-            </a>
-          </div> */}
-
           <div className="sneaker-detail-page__story">
             <h2>Product Details</h2>
             <p dangerouslySetInnerHTML={{ __html: sneaker.story_html }}></p>
           </div>
         </div>
       ) : (
-        <span>Loading</span>
+        <span></span>
       )}
     </div>
   );

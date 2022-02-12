@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef } from 'react';
-import { Card } from 'antd';
+import { Alert, Card } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSneakers, initState, initPagination, nextPage, setSortBy, setNameLike, setShoeCondtion } from '../../stores/features/sneakerSlice';
 import { RootState } from '../../stores';
@@ -15,7 +15,7 @@ const SneakerGridPage: React.FC<Props> = (props) => {
   // Snecker frame div element
   const sneakerGrid = useRef(null as HTMLDivElement);
   const dispatch = useDispatch();
-  const { loading, sneakers, pageNo, sortBy, limit, nameLike, shoeCondtion } = useSelector((state: RootState) => state.sneaker);
+  const { loading, sneakers, pageNo, sortBy, limit, nameLike, shoeCondtion, totalCount, errors } = useSelector((state: RootState) => state.sneaker);
   const history = useHistory();
 
   const onGridScroll = () => {
@@ -75,7 +75,15 @@ const SneakerGridPage: React.FC<Props> = (props) => {
   return (
     <div ref={sneakerGrid} className="sneaker-grid-page">
       {/* Filter,Search condition */}
-      <SneakerGridToolbox defaultSortBy={sortBy} onSortBy={onSortByChange} onNameChange={onNameChange} onConditionChange={onConditionChange} />
+      <SneakerGridToolbox
+        searchResultCount={totalCount}
+        defaultSortBy={sortBy}
+        onSortBy={onSortByChange}
+        onNameChange={onNameChange}
+        onConditionChange={onConditionChange}
+      />
+      {/* Error Message */}
+      {errors && <Alert type="error" message="Error" showIcon description="An error occured, please contact to admin" style={{ marginBottom: '12px' }} />}
       {/* Sneaker grid */}
       <Card>
         {sneakers.map((item) => {

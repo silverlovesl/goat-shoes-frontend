@@ -7,11 +7,18 @@
     display: flex;
     padding: 12px 0;
     justify-content: space-between;
+    align-items: center;
+  }
+
+  &__search-result {
+    color: $primary-gray;
+    font-size: 12px;
   }
 
   &__filter-btn {
     color: $primary-color;
   }
+
   &__sort-by {
     > span {
       margin-right: 8px;
@@ -32,6 +39,39 @@
       > label {
         margin-right: 12px;
       }
+    }
+  }
+
+  @media screen and (min-width: $screen-xs-min) {
+    &__wrapper {
+      flex-direction: column;
+    }
+    &__filter-btn {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: $screen-sm-min) {
+    &__wrapper {
+      flex-direction: column;
+    }
+    &__filter-btn {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: $screen-md-min) {
+    &__wrapper {
+      flex-direction: row;
+    }
+    &__filter-btn {
+      display: block;
+    }
+  }
+
+  @media screen and (min-width: $screen-lg-min) {
+    &__filter-btn {
+      display: block;
     }
   }
 }

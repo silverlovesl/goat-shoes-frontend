@@ -6,6 +6,7 @@ import './SneakerGridToolbox.scss';
 const { Option } = Select;
 
 type Props = {
+  searchResultCount?: number;
   defaultSortBy: SneakSearchSortBy;
   className?: string;
   onNameChange?: (name: string) => void;
@@ -32,6 +33,9 @@ const SneakerGridToolbox: React.FC<Props> = (props) => {
           <span>{!showFilter ? 'Show Filters' : 'Hide Filters'}</span>
           <span>&gt;</span>
         </a>
+        <span className="sneaker-grid-toolbox__search-result">
+          Showing {props.searchResultCount} {props.searchResultCount > 1 ? 'Results' : 'Result'}
+        </span>
         <div className="sneaker-grid-toolbox__sort-by">
           <span>Sort By:</span>
           <Select defaultValue={props.defaultSortBy} className="sneaker-grid-toolbox__sort-by-box" onSelect={onSortBy}>

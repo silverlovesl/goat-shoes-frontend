@@ -6,24 +6,33 @@ import { AppThunk } from '../configuration';
 type SneakerDetailState = {
   sneaker: Sneaker | null;
   loading: boolean;
-  err: string | null;
+  errors: string | null;
 };
 
 const initialState: SneakerDetailState = {
   sneaker: null,
   loading: false,
-  err: null,
+  errors: null,
 };
 
 const sneakerDetail = createSlice({
   name: '@@SNEAKER_DETAIL',
   initialState,
   reducers: {
+    initState: (state: SneakerDetailState) => {
+      state.loading = true;
+      state.errors = null;
+      state.sneaker = null;
+    },
     startFetching: (state: SneakerDetailState) => {
       state.loading = true;
+      state.errors = null;
     },
     setSneaker: (state: SneakerDetailState, action: PayloadAction<Sneaker>) => {
       state.sneaker = action.payload;
+    },
+    setError: (state: SneakerDetailState, action: PayloadAction<string>) => {
+      state.errors = action.payload;
     },
     finishFetching: (state: SneakerDetailState) => {
       state.loading = false;
@@ -31,7 +40,7 @@ const sneakerDetail = createSlice({
   },
 });
 
-export const { startFetching, setSneaker, finishFetching } = sneakerDetail.actions;
+export const { initState, startFetching, setSneaker, finishFetching, setError } = sneakerDetail.actions;
 
 /**
  * Fetch sneaker by id
@@ -45,7 +54,8 @@ export const fetchSneakerByID =
       dispach(startFetching());
       const sneaker = await sneakerAPI.fetchSneakerByID(sneak_id);
       dispach(setSneaker(sneaker));
-    } catch (err) {
+    } catch (err: any) {
+      dispach(setError(err?.statusText));
     } finally {
       dispach(finishFetching());
     }

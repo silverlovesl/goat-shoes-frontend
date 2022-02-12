@@ -15,13 +15,13 @@ class SneakerAPI {
     sortBy: SneakSearchSortBy = 'release-date-N',
     nameLike: string = '',
     shoeCondtion: string = ''
-  ): Promise<Sneaker[]> {
+  ): Promise<{ data: Sneaker[]; totalCount?: number }> {
     let url = '/sneakers?';
     if (pageNo) {
-      url = `${url}&_page=${pageNo}`;
+      url = `${url}&_start=${(pageNo - 1) * limit}`;
     }
     if (limit) {
-      url = `${url}&_limit=${limit}`;
+      url = `${url}&_end=${limit * pageNo}`;
     }
     if (nameLike) {
       url = `${url}&name_like=${nameLike}`;
@@ -46,7 +46,8 @@ class SneakerAPI {
         break;
     }
     return API.get(url, {}).then((res) => {
-      return res.data;
+      const totalCount = parseInt(res.headers['x-total-count']);
+      return { data: res.data, totalCount: totalCount };
     });
   }
 
