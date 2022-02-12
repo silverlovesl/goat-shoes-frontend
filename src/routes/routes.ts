@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteProps } from 'react-router';
+import { RouteProps } from 'react-router-dom';
 
 export const SneakerGridPage = React.lazy(() => import('../pages/SneakerGridPage/SneakerGridPage'));
 const SneakerDetailPage = React.lazy(() => import('../pages/SneakerDetailPage/SneakerDetailPage'));
@@ -13,6 +13,6 @@ export default {
   sneakerDetail: {
     component: SneakerDetailPage,
     path: '/sneaker/:sneaker_id',
-    exact: true,
+    exact: false,
   } as RouteProps,
 };

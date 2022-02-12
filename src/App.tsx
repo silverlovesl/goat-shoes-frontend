@@ -1,8 +1,7 @@
-import { RouteComponentProps } from 'react-router';
 import RouterTemplate from './routes/RouterTemplate';
 import './App.scss';
 
-type PageProps = {} & RouteComponentProps;
+type PageProps = {};
 
 const App: React.FC<PageProps> = (props) => {
   return (

@@ -1,11 +1,9 @@
 import React, { Suspense } from 'react';
-import routes, { SneakerGridPage } from './routes';
-import { Switch, Route, withRouter, BrowserRouter } from 'react-router-dom';
+import routes from './routes';
+import { Switch, Route, withRouter, RouteProps } from 'react-router-dom';
 import PageLayout from '../components/PageLayout';
-import { RouteComponentProps } from 'react-router-dom';
-import { Redirect, RouteProps } from 'react-router';
 
-type PageProps = {} & RouteComponentProps;
+type PageProps = {};
 
 const RouterTemplate: React.FC<PageProps> = (props) => {
   let routeComps = [];
@@ -17,11 +15,9 @@ const RouterTemplate: React.FC<PageProps> = (props) => {
   });
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Suspense fallback={<></>}>{routeComps.map((comp) => comp)}</Suspense>
-      </Switch>
-    </BrowserRouter>
+    <Switch>
+      <Suspense fallback={<></>}>{routeComps.map((comp) => comp)}</Suspense>
+    </Switch>
   );
 };
 
