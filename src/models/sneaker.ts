@@ -1,4 +1,4 @@
-import { Enums, ShoeCondition } from '.';
+import { Gender, ShoeCondition } from '.';
 
 export interface Sneaker {
   id: number;
@@ -9,7 +9,7 @@ export interface Sneaker {
   color: string;
   designer: string;
   details: string;
-  gender: Enums.Gender[];
+  gender: Gender[];
   grid_picture_url: string;
   has_picture: boolean;
   has_stock: boolean;
