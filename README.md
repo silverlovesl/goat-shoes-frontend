@@ -2,6 +2,9 @@
 
 This is a react application built with [vite](https://vitejs.dev/)
 
+# Environment
+- node version v16+
+
 # Setup
 ```bash
 # install dependency
