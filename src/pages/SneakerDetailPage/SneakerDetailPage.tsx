@@ -26,7 +26,6 @@ const SneakerDetailPage: React.FC<Props> = (props) => {
     if (!isNaN(sneaker_id)) {
       dispatch(fetchSneakerByID(sneaker_id));
     } else {
-      console.log('Come here');
       dispatch(setErrors('Invalid url param'));
     }
 

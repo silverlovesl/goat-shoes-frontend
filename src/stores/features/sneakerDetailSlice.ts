@@ -55,7 +55,6 @@ export const fetchSneakerByID =
       const sneaker = await sneakerAPI.fetchSneakerByID(sneak_id);
       dispach(setSneaker(sneaker));
     } catch (err: any) {
-      console.log('On Error', err);
       dispach(setErrors(err?.statusText));
     } finally {
       dispach(finishFetching());

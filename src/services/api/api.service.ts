@@ -13,12 +13,10 @@ export const API = axios.create({
 let cancelTokenSource = axios.CancelToken.source();
 
 export const callRequests = (message: string = 'unauthorized') => {
-  console.warn(`Cancel all requests after${message}`);
   cancelTokenSource.cancel();
 };
 
 export const restoreRequests = () => {
-  console.log(`%c Restore all requests`, 'color: #52c41a');
   cancelTokenSource = axios.CancelToken.source();
 };
 
@@ -36,7 +34,6 @@ API.interceptors.request.use(
 );
 
 API.interceptors.response.use(undefined, (err) => {
-  console.log(err?.response);
   if (err.response) {
     return Promise.reject(err.response);
   } else {

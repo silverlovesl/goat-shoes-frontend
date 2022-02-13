@@ -6,6 +6,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "jest --verbose",
+    "coverage": "jest --verbose --coverage",
     "test:watch": "yarn test -- --watch"
   },
   "dependencies": {
