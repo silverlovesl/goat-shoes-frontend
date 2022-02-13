@@ -28,6 +28,7 @@ yarn test:watch
 ```bash
 # Get json-server
 yarn global add json-server
+source ~/.zshrc # or ~/.bash_profile
 
 # startup
 json-server ./api.json --port 5000
@@ -39,7 +40,7 @@ To close: Preference > Sharing > [Airplay Receiver]
 # Acceptance
 - [x] It is a React application.
 - [x] The collection shows 20 shoes initially.
-- [x] The user can take an action to load more shoes.(Scroll to load more data)
+- [x] The user can take an action to load more shoes.(Scroll to bottom load more data)
 - [x] Click to show shoe detail
 
 # Self-Grading
