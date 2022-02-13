@@ -72,7 +72,7 @@ describe('Test sneakerDetailSlice', () => {
     Object.keys(TEST_SNEAKER).forEach((key) => {
       expect(sneakerDetail.sneaker[key]).toEqual(TEST_SNEAKER[key]);
     });
-    expect(sneakerDetail.loading).toBe(true);
+    expect(sneakerDetail.loading).toBe(false);
     expect(sneakerDetail.errors).toBe(null);
   });
 });
