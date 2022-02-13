@@ -32,6 +32,9 @@ yarn global add json-server
 # startup
 json-server ./api.json --port 5000
 ```
+:warning: Mac use port 5000 for <b>Airplay Receiver</b> service.  
+To close: Preference > Sharing > [Airplay Receiver]
+
 
 # Acceptance
 - [x] It is a React application.
