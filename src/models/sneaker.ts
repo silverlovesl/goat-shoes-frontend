@@ -20,7 +20,7 @@ export interface Sneaker {
   nickname: string;
   original_picture_url: string;
   product_template_id: number;
-  release_date: Date;
+  release_date: string;
   release_date_unix: number;
   release_year: number;
   retail_price_cents: number;
@@ -29,6 +29,7 @@ export interface Sneaker {
   size_range: number[];
   sku: string;
   status: string;
+  slug: string;
   story_html: string;
   upper_material: string;
 }

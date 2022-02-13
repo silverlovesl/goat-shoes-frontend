@@ -20,7 +20,7 @@ const sneakerDetail = createSlice({
   initialState,
   reducers: {
     initState: (state: SneakerDetailState) => {
-      state.loading = true;
+      state.loading = false;
       state.errors = null;
       state.sneaker = null;
     },

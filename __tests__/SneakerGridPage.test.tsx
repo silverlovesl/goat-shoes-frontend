@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import SneakerGridPage from '../pages/SneakerGridPage/SneakerGridPage';
-import store from '../stores/configuration';
-import { initState, setErrors } from '../stores/features/sneakerSlice';
+import SneakerGridPage from '../src/pages/SneakerGridPage/SneakerGridPage';
+import store from '../src/stores/configuration';
+import { initState, setErrors } from '../src/stores/features/sneakerSlice';
 
 jest.mock('react-router-dom', () => ({
   useHistory: () => ({
@@ -40,13 +40,6 @@ describe('Test sneaker grid view page', () => {
     store.dispatch(setErrors('Some error occured'));
     expect(screen.queryByTestId('sneaker-grid-page__alert')).toBeInTheDocument();
   });
-
-  // test('can click grid cell to transfer to detail page', async () => {
-  //   const gridCells = await screen.findAllByTestId('sneaker-grid-page__grid-cell');
-  //   const firstCell = gridCells[0];
-  //   const alink = firstCell.firstChild;
-  //   fireEvent.click(alink);
-  // });
 });
 
 describe('Test sneaker grid view toolbox', () => {

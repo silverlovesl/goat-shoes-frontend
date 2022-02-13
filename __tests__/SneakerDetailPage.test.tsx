@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import SneakerDetailPage from '../pages/SneakerDetailPage/SneakerDetailPage';
-import store from '../stores/configuration';
-import { fetchSneakerByID, initState } from '../stores/features/sneakerDetailSlice';
+import SneakerDetailPage from '../src/pages/SneakerDetailPage/SneakerDetailPage';
+import store from '../src/stores/configuration';
+import { fetchSneakerByID, initState } from '../src/stores/features/sneakerDetailSlice';
 
 const sneaker_id = 52015;
 
