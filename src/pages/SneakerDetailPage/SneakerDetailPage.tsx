@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../stores';
-import { fetchSneakerByID, initState } from '../../stores/features/sneakerDetailSlice';
+import { fetchSneakerByID, initState, setErrors } from '../../stores/features/sneakerDetailSlice';
 import { Alert, Button, Card } from 'antd';
 import { useRouteMatch, useHistory } from 'react-router-dom';
 import { StringUtils } from '../../utils';
@@ -22,9 +22,12 @@ const SneakerDetailPage: React.FC<Props> = (props) => {
   };
 
   useEffect(() => {
-    const sneaker_id = match.params['sneaker_id'] as string;
-    if (!Number.isNaN(sneaker_id)) {
-      dispatch(fetchSneakerByID(parseInt(sneaker_id)));
+    const sneaker_id = Number(match.params['sneaker_id'] as string);
+    if (!isNaN(sneaker_id)) {
+      dispatch(fetchSneakerByID(sneaker_id));
+    } else {
+      console.log('Come here');
+      dispatch(setErrors('Invalid url param'));
     }
 
     return () => {

@@ -31,7 +31,7 @@ const sneakerDetail = createSlice({
     setSneaker: (state: SneakerDetailState, action: PayloadAction<Sneaker>) => {
       state.sneaker = action.payload;
     },
-    setError: (state: SneakerDetailState, action: PayloadAction<string>) => {
+    setErrors: (state: SneakerDetailState, action: PayloadAction<string>) => {
       state.errors = action.payload;
     },
     finishFetching: (state: SneakerDetailState) => {
@@ -40,7 +40,7 @@ const sneakerDetail = createSlice({
   },
 });
 
-export const { initState, startFetching, setSneaker, finishFetching, setError } = sneakerDetail.actions;
+export const { initState, startFetching, setSneaker, finishFetching, setErrors } = sneakerDetail.actions;
 
 /**
  * Fetch sneaker by id
@@ -56,7 +56,7 @@ export const fetchSneakerByID =
       dispach(setSneaker(sneaker));
     } catch (err: any) {
       console.log('On Error', err);
-      dispach(setError(err?.statusText));
+      dispach(setErrors(err?.statusText));
     } finally {
       dispach(finishFetching());
     }
