@@ -2,6 +2,8 @@
 
 This is a react application built with [vite](https://vitejs.dev/)
 
+[![Screen shot](https://img.youtube.com/vi/-Ta4Q6pGTI4/0.jpg)](https://www.youtube.com/watch?v=-Ta4Q6pGTI4)
+
 # Environment
 - node version v16+
 
@@ -37,7 +39,7 @@ source ~/.zshrc # or ~/.bash_profile
 json-server ./api.json --port 5000
 ```
 :warning: Mac use port 5000 for <b>Airplay Receiver</b> service.  
-To close: Preference > Sharing > [Airplay Receiver]
+To stop the service: Preference > Sharing > [Airplay Receiver]
 
 
 # Acceptance
@@ -50,7 +52,7 @@ To close: Preference > Sharing > [Airplay Receiver]
 - [x] Clear README
 - [x] Responsive
 - [x] Test code
-- [x] clean architecture
+- [x] Clean architecture
 - [x] User can filter shoes by name or shoe condition
 - [x] User can sort result by price, release date
 
