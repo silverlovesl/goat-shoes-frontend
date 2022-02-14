@@ -3,6 +3,7 @@
 This is a react application built with [vite](https://vitejs.dev/)
 
 [![Screen shot](https://img.youtube.com/vi/-Ta4Q6pGTI4/0.jpg)](https://www.youtube.com/watch?v=-Ta4Q6pGTI4)
+[Full video](https://www.youtube.com/watch?v=-Ta4Q6pGTI4)
 
 # Environment
 - node version v16+
